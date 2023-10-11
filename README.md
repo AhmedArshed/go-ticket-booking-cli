@@ -22,5 +22,7 @@ This is a simple command-line interface (CLI) application developed in Go (Golan
 Run the Application:
 
 cd go-ticket-booking-cli
+
+
 go run main.go
 
