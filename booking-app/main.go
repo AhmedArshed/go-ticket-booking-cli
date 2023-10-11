@@ -34,6 +34,7 @@ func main() {
 
 		if isValidName && isValidEmail && isValidTickedNumber {
 			bookTicket(userTickets, firstName, lastName, email)
+			wg.Add(1)
 			go sendTicket(userTickets, firstName, lastName, email)
 			firstNames := getFirstName()
 			fmt.Printf("first name are %v\n", firstNames)
@@ -48,6 +49,7 @@ func main() {
 		}
 
 	}
+	wg.Wait()
 }
 
 func greatUser() {
@@ -122,4 +124,5 @@ func sendTicket(userTickets uint, firstName string, lastName string, email strin
 	time.Sleep(10 * time.Second)
 	var tickets = fmt.Sprintf("%v tickets for %v %v \nto email address%v\n", userTickets, firstName, lastName, email)
 	fmt.Printf("Sending tickets:\n%v\nto email address %v\n", tickets, email)
+	wg.Done()
 }
